@@ -1,13 +1,71 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import moment from 'moment';
+import Carousel from 'react-native-reanimated-carousel';
+
+import Card from '../../components/Card';
+import CacheImage from '../../components/CacheImage';
+import {IconButton} from '../../components/Buttons';
 import Images from '../../assets/images';
 import {colors} from '../../theme/colors';
+import {Feed} from '../../utils/dummyNewsFeed';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  // screenWidth - Card margin & padding
+  const carousalWidth = Dimensions.get('window').width - 32 - 24;
+
+  const rederFeed = ({item}) => <CacheImage image={item} />;
+
+  const renderFeed = ({item}) => (
+    <Card>
+      <View style={styles.summaryContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <CacheImage image={item.profile} style={styles.imgStyle} />
+        </TouchableOpacity>
+        <View style={styles.subContainer}>
+          <View style={styles.textWrapper}>
+            <Text style={styles.title}>{item.name}</Text>
+            <Text style={{...styles.subTitle, paddingLeft: 10}}>
+              {moment(item.time).fromNow()}
+            </Text>
+          </View>
+          <Text style={styles.subTitle}>{item.location}</Text>
+        </View>
+        <IconButton
+          icon={Images.icons.kebab_menu}
+          onPress={() => console.log('Menu clicked')}
+        />
+      </View>
+      {/* Carousal Images */}
+      {item.images.length > 0 && (
+        <Carousel
+          // autoPlay={true}
+          loop={item.images.length > 1}
+          width={carousalWidth}
+          height={240}
+          style={{marginBottom: 10}}
+          data={item.images}
+          renderItem={rederFeed}
+        />
+      )}
+      <Text style={styles.subTitle}>{item.description}</Text>
+    </Card>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 20}}>News Feed Here</Text>
+      <FlatList
+        data={Feed}
+        renderItem={renderFeed}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </View>
   );
 };
@@ -16,21 +74,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffff',
+  },
+  summaryContainer: {
+    flex: 1,
+    marginVertical: 10,
+    flexDirection: 'row',
+  },
+  subContainer: {
+    flex: 1,
+    marginHorizontal: 10,
+  },
+  textWrapper: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
   title: {
-    fontSize: 30,
-    color: colors.textColors.primaryColor,
+    fontSize: 16,
+    color: colors.textColors.secondoryColor,
   },
   subTitle: {
-    fontSize: 15,
-    color: colors.textColors.primaryColor,
+    fontSize: 12,
+    color: colors.textColors.secondoryColor,
   },
-  buttonText: {
-    fontSize: 20,
-    color: colors.primaryColor,
+  imgStyle: {
+    height: 65,
+    width: 65,
   },
 });
 

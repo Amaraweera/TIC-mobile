@@ -4,10 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 import Images from '../../assets/images';
 import {colors} from '../../theme/colors';
 
-const Agency = () => {
+const Events = () => {
   return (
     <View style={styles.container}>
-      <Text style={{fontSize: 20}}>Agencies Here</Text>
+      <Text style={styles.title}>Events</Text>
     </View>
   );
 };
@@ -21,17 +21,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffff',
   },
   title: {
-    fontSize: 30,
-    color: colors.textColors.primaryColor,
-  },
-  subTitle: {
-    fontSize: 15,
-    color: colors.textColors.primaryColor,
-  },
-  buttonText: {
     fontSize: 20,
-    color: colors.primaryColor,
   },
 });
 
-export default Agency;
+export default Events;

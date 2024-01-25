@@ -1,51 +1,79 @@
-import React from 'react';
-import {View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, Image, TextInput, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+
+import {PrimaryButton} from '../../components/Buttons';
 import Images from '../../assets/images';
-import { colors } from '../../theme/colors';
+import {colors} from '../../theme/colors';
 
 const Login = () => {
   const navigation = useNavigation();
 
+  const [password, onChangePassword] = useState('');
+  const [email, onChangeEmail] = useState('');
+
+  const onHandleEmail = email => {
+    onChangeEmail(email);
+  };
+
+  const onHandlePassword = pass => {
+    onChangePassword(pass);
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#09034f'
-        }}>
+    <View style={styles.container}>
       <View style={{padding: 10}}>
-        <Image source={Images.img_logo} style={{height: 75, width: 75}} />
+        <Image source={Images.logos.img_logo} style={styles.imgStyle} />
       </View>
-      {/* <Text style={{fontSize: 30, color: '#ffff' }}>Login To My Journey</Text> */}
-        <TextInput
-            style={{width: 250 ,borderColor: colors.secondoryColor, borderWidth: 1, borderRadius: 5, color: colors.textColors.primaryColor, alignSelf: 'center'}}
-            onChangeText={() => {}}
-            placeholder={'Email / Phone Number'}
-            placeholderTextColor={colors.textColors.primaryColor}
-            textAlign={'center'}
-            value={''}
-        />
-        <TextInput
-            style={{width: 250 ,borderColor: colors.secondoryColor, borderWidth: 1, borderRadius: 5, color: colors.textColors.primaryColor, alignSelf: 'center', marginTop: 5}}
-            onChangeText={() => {}}
-            placeholder={'Password'}
-            placeholderTextColor={colors.textColors.primaryColor}
-            textAlign={'center'}
-            value={''}
-        />
-        <TouchableOpacity
-            style={{backgroundColor: '#fcfe2f', paddingVertical: 10, paddingHorizontal: 40,borderRadius: 30, marginTop: 10}}
-            onPress={() => navigation.navigate('Home')}>
-            <Text style={{
-                fontSize: 20,
-                color: colors.primaryColor,
-            }}>Login</Text>
-        </TouchableOpacity>
+      <Text style={styles.title}>Travel in Ceylon</Text>
+      <TextInput
+        style={styles.inputStyle}
+        onChangeText={onHandleEmail}
+        placeholder={'Email / Phone Number'}
+        placeholderTextColor={colors.textColors.primaryColor}
+        value={email}
+      />
+      <TextInput
+        style={styles.inputStyle}
+        onChangeText={onHandlePassword}
+        placeholder={'Password'}
+        placeholderTextColor={colors.textColors.primaryColor}
+        value={password}
+        secureTextEntry
+      />
+      <PrimaryButton
+        label="Login"
+        onPress={() => navigation.navigate('Dashboard')}
+      />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.primaryColor,
+  },
+  title: {
+    fontSize: 30,
+    color: colors.textColors.primaryColor,
+  },
+  imgStyle: {
+    height: 75,
+    width: 75,
+  },
+  inputStyle: {
+    width: 250,
+    padding: 5,
+    borderColor: colors.secondoryColor,
+    borderWidth: 1,
+    borderRadius: 5,
+    color: colors.textColors.primaryColor,
+    marginTop: 15,
+  },
+});
 
 export default Login;

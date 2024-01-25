@@ -1,7 +1,12 @@
 export const colors = {
-  primaryColor: '#09034f',
-  secondoryColor: '#fcfe2f',
+  primaryColor: '#020025',
+  secondoryColor: '#5779FF',
   textColors: {
     primaryColor: '#ffff',
+    secondoryColor: '#000000',
+  },
+  buttonColors: {
+    primaryColor: '#5779FF',
+    secondoryColor: '#5779FF',
   },
 };
