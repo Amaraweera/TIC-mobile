@@ -8,7 +8,7 @@ import Ratings from '../../components/Ratings';
 import {IconButton} from '../../components/Buttons';
 import Images from '../../assets/images';
 import {colors} from '../../theme/colors';
-import {GUIDERS} from '../../utils/dummyGuiders';
+import {GUIDERS} from '../../utils/mockData/dummyGuiders';
 
 const Guiders = () => {
   const renderGuiders = ({item}) => (

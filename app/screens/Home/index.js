@@ -15,7 +15,7 @@ import CacheImage from '../../components/CacheImage';
 import {IconButton} from '../../components/Buttons';
 import Images from '../../assets/images';
 import {colors} from '../../theme/colors';
-import {Feed} from '../../utils/dummyNewsFeed';
+import {Feed} from '../../utils/mockData/dummyNewsFeed';
 
 const Home = ({navigation}) => {
   // screenWidth - Card margin & padding

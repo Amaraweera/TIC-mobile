@@ -12,7 +12,7 @@ import {
 import CacheImage from '../../components/CacheImage';
 import {IconButton} from '../../components/Buttons';
 import Images from '../../assets/images';
-import {USER_DATA} from '../../utils/dummyUser';
+import {USER_DATA} from '../../utils/mockData/dummyUser';
 
 const Profile = () => {
   const ScreenWidth = Dimensions.get('window').width;
