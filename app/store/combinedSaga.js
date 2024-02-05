@@ -1,8 +1,8 @@
 import {all} from 'redux-saga/effects';
-import homeSaga from '../containers/Home/saga';
+import {bookingSagas} from '../screens/Bookings/sagas';
 
 function* rootSaga() {
-  yield all([homeSaga()]);
+  yield all([...bookingSagas]);
 }
 
 export default rootSaga;

@@ -27,7 +27,7 @@ const persistedReducer = persistReducer(config, rootReducers);
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: middleware,
+  middleware: () => middleware,
 });
 const persistor = persistStore(store);
 const storeConfig = () => {

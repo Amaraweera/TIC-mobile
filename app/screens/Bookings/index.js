@@ -1,10 +1,20 @@
-import React from 'react';
-import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import Images from '../../assets/images';
-import {colors} from '../../theme/colors';
+import React, {useEffect} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {bookingAction} from './redux/actions/BookingsActions';
 
 const Bookings = () => {
+  const dispatch = useDispatch();
+  const bookingDispatch = payload => dispatch(bookingAction(payload));
+
+  useEffect(() => {
+    const payload = {
+      appName: 'TIC',
+    };
+
+    bookingDispatch(payload);
+  });
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bookings</Text>

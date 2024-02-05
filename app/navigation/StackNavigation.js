@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 function StackNavigation() {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
